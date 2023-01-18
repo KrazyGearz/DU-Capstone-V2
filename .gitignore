@@ -1,0 +1,4 @@
+node_modules
+.xo-config.json
+.prettierignore
+.prettierrc.json
