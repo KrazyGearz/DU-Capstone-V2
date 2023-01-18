@@ -88,6 +88,24 @@ const authors = [
   }
 ];
 
+const categories = [
+  {
+    id: '1',
+    name: 'Fantasy',
+    books: ['1', '2', '3']
+  },
+  {
+    id: '2',
+    name: 'Fiction',
+    books: ['1', '2', '3']
+  },
+  {
+    id: '3',
+    name: 'Programming',
+    books: ['4']
+  }
+];
+
 const typeDefs = gql`
   type Book {
     id: ID!
