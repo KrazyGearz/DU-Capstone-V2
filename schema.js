@@ -1,4 +1,5 @@
 import { gql } from 'apollo-server-express';
+import { GraphQLError } from 'graphql';
 
 // Pre-seeded data
 const books = [
@@ -140,7 +141,15 @@ const typeDefs = gql`
       categoryIds: [ID!]!
       description: String
     ): Book
-    addCategory(name: String!): Category
+    addCategory(name: String!, bookIds: [ID]): Category
+    updateBook(
+      id: ID!
+      title: String!
+      authorId: ID
+      coverImage: String
+      categoryIds: [ID]
+      description: String
+    ): Book
   }
 `;
 
@@ -156,12 +165,21 @@ const resolvers = {
       books.filter(book => bookIds.includes(book.id))
   },
   Category: {
-    books: ({ id: bookId }) => books.filter(book => book.id === bookId)
+    books: ({ books: bookIds }) =>
+      books.filter(book => bookIds.includes(book.id))
   },
   Query: {
     getBooks: () => books,
-    getBook: (_parent, { id }) => books.find(book => book.id === id),
-    getAuthor: (_parent, { id }) => authors.find(author => author.id === id)
+    getBook: (_parent, { id }) => {
+      const book = books.find(book => book.id === id);
+      if (book == null) throw new GraphQLError('This book does not exist.');
+      return book;
+    },
+    getAuthor: (_parent, { id }) => {
+      const author = authors.find(author => author.id === id);
+      if (author == null) throw new GraphQLError('This author does not exist.');
+      return author;
+    }
   },
   Mutation: {
     addBook: (
@@ -179,13 +197,30 @@ const resolvers = {
       books.push(book);
       return book;
     },
-    addCategory: (_parent, { name }) => {
+    addCategory: (_parent, { name, bookIds }) => {
       const category = {
         id: String(categories.length + 1),
-        name
+        name,
+        books: bookIds
       };
       categories.push(category);
       return category;
+    },
+    updateBook: (
+      _parent,
+      { id, title, authorId, coverImage, categoryIds, description }
+    ) => {
+      const bookIndex = books.findIndex(book => book.id === id);
+      const book = {
+        id,
+        title,
+        author: authorId,
+        coverImage: coverImage,
+        categories: categoryIds,
+        description: description
+      };
+      books[bookIndex] = book;
+      return book;
     }
   }
 };
