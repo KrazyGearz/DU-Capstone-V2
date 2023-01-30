@@ -128,9 +128,7 @@ const typeDefs = gql`
     books: [Book]
   }
   type Query {
-    getBooks: [Book!]!
     getBook(id: ID!): Book
-    getAuthor(id: ID!): Author
   }
   type Mutation {
     addBook(
@@ -140,7 +138,6 @@ const typeDefs = gql`
       categoryIds: [ID!]!
       description: String
     ): Book
-    addCategory(name: String!): Category
   }
 `;
 
@@ -151,17 +148,8 @@ const resolvers = {
     categories: ({ categories: categoryIds }) =>
       categories.filter(category => categoryIds.includes(category.id))
   },
-  Author: {
-    books: ({ books: bookIds }) =>
-      books.filter(book => bookIds.includes(book.id))
-  },
-  Category: {
-    books: ({ id: bookId }) => books.filter(book => book.id === bookId)
-  },
   Query: {
-    getBooks: () => books,
-    getBook: (_parent, { id }) => books.find(book => book.id === id),
-    getAuthor: (_parent, { id }) => authors.find(author => author.id === id)
+    getBook: (_parent, { id }) => books.find(book => book.id === id)
   },
   Mutation: {
     addBook: (
@@ -178,14 +166,6 @@ const resolvers = {
       };
       books.push(book);
       return book;
-    },
-    addCategory: (_parent, { name }) => {
-      const category = {
-        id: String(categories.length + 1),
-        name
-      };
-      categories.push(category);
-      return category;
     }
   }
 };
