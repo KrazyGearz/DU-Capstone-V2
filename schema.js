@@ -169,7 +169,6 @@ const resolvers = {
       books.filter(book => bookIds.includes(book.id))
   },
   Query: {
-    getBooks: () => books,
     getBook: (_parent, { id }) => {
       const book = books.find(book => book.id === id);
       if (book == null) throw new GraphQLError('This book does not exist.');
