@@ -238,3 +238,50 @@ describe('Code review 2', () => {
     });
   });
 });
+
+describe('Code review 3', () => {
+  describe('get category', () => {
+    const getCategory = `
+    query Query($getCategoryId: ID!) {
+      getCategory(id: $getCategoryId) {
+        id
+        books {
+          id
+        }
+      }
+    }
+          `;
+
+    it('should return a book by ID', async () => {
+      const response = await testServer.executeOperation({
+        query: getCategory,
+        variables: { getCategoryId: 1 }
+      });
+      expect(response.body.singleResult.data).toEqual({
+        getCategory: {
+          id: '1',
+          books: [
+            {
+              id: '1'
+            },
+            {
+              id: '2'
+            },
+            {
+              id: '3'
+            }
+          ]
+        }
+      });
+    });
+    it('Throw error for incorrect category id', async () => {
+      const response = await testServer.executeOperation({
+        query: getCategory,
+        variables: { getCategoryId: 9 }
+      });
+      expect(response.body.singleResult.errors[0].message).toEqual(
+        'This category does not exist.'
+      );
+    });
+  });
+});

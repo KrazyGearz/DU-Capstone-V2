@@ -132,6 +132,7 @@ const typeDefs = gql`
     getBooks: [Book!]!
     getBook(id: ID!): Book
     getAuthor(id: ID!): Author
+    getCategory(id: ID!): Category
   }
   type Mutation {
     addBook(
@@ -179,6 +180,12 @@ const resolvers = {
       const author = authors.find(author => author.id === id);
       if (author == null) throw new GraphQLError('This author does not exist.');
       return author;
+    },
+    getCategory: (_parent, { id }) => {
+      const category = categories.find(category => category.id === id);
+      if (category == null)
+        throw new GraphQLError('This category does not exist.');
+      return category;
     }
   },
   Mutation: {
