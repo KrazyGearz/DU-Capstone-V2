@@ -1,9 +1,9 @@
 import '@babel/polyfill';
-
 import cors from 'cors';
 import express from 'express';
-import { typeDefs, resolvers } from './schema.js';
 import { ApolloServer } from '@apollo/server';
+import { typeDefs, resolvers } from './schema.js';
+
 const app = express();
 app.use(cors());
 app.use(express.json());

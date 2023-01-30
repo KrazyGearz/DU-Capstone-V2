@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1675107447660" clover="3.2.0">
+  <project timestamp="1675107447660" name="All files">
+    <metrics statements="29" coveredstatements="29" conditionals="6" coveredconditionals="6" methods="18" coveredmethods="18" elements="53" coveredelements="53" complexity="0" loc="29" ncloc="29" packages="1" files="1" classes="1"/>
+    <file name="schema.js" path="/Users/bespin-starter/Desktop/DU Code/DU Capstone V2/schema.js">
+      <metrics statements="29" coveredstatements="29" conditionals="6" coveredconditionals="6" methods="18" coveredmethods="18"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="41" count="1" type="stmt"/>
+      <line num="92" count="1" type="stmt"/>
+      <line num="110" count="1" type="stmt"/>
+      <line num="157" count="1" type="stmt"/>
+      <line num="160" count="6" type="stmt"/>
+      <line num="162" count="10" type="stmt"/>
+      <line num="166" count="5" type="stmt"/>
+      <line num="170" count="10" type="stmt"/>
+      <line num="174" count="6" type="stmt"/>
+      <line num="175" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="176" count="1" type="stmt"/>
+      <line num="179" count="9" type="stmt"/>
+      <line num="180" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="181" count="1" type="stmt"/>
+      <line num="184" count="5" type="stmt"/>
+      <line num="185" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="186" count="1" type="stmt"/>
+      <line num="187" count="1" type="stmt"/>
+      <line num="195" count="1" type="stmt"/>
+      <line num="203" count="1" type="stmt"/>
+      <line num="204" count="1" type="stmt"/>
+      <line num="207" count="1" type="stmt"/>
+      <line num="212" count="1" type="stmt"/>
+      <line num="213" count="1" type="stmt"/>
+      <line num="219" count="1" type="stmt"/>
+      <line num="220" count="1" type="stmt"/>
+      <line num="228" count="1" type="stmt"/>
+      <line num="229" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>
